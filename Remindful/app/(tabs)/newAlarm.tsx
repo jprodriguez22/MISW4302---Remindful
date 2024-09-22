@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, SafeAreaView, ScrollView } from "react-native";
 import { PaperProvider } from "react-native-paper";
-import { useState } from "react";
 
 import { useTheme } from "react-native-paper";
 import { Card, Icon, Switch } from "react-native-paper";
@@ -38,7 +37,7 @@ export default function NewAlarm() {
                 setSelectedHour(index);
               }}
               selectedIndex={selectedHour}
-              elementHeight={120}
+              elementHeight={80}
               containerStyle={styles.containerStyle}
               selectedLayoutStyle={styles.selectedLayout}
               elementTextStyle={styles.selectedElement}
@@ -52,12 +51,16 @@ export default function NewAlarm() {
                 setSelectedMinute(index);
               }}
               selectedIndex={selectedMinute}
-              elementHeight={120}
+              elementHeight={80}
               containerStyle={styles.containerStyle}
               selectedLayoutStyle={styles.selectedLayout}
               elementTextStyle={styles.selectedElement}
             />
           </View>
+
+          <Card mode={"elevated"} style={styles.cardBody}>
+              <Text>Hola</Text>
+          </Card>
 
         </View>
       </SafeAreaView>
@@ -70,10 +73,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#2E3440",
   },
+  cardBody: {
+    flex: 1,
+    backgroundColor: "#1B202B"
+  },
   clockContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    marginBottom: 40,
   },
   clockText: {
     color: "#fff",
@@ -85,7 +93,9 @@ const styles = StyleSheet.create({
   gridRootContainer: {
     flex: 1,
     flexDirection: "column",
-    alignContent: "flex-start"
+    alignContent: "flex-start",
+    marginTop: 20,
+    padding: 20,
   },
   selectedLayout: {
     backgroundColor: "#2E3440",
