@@ -4,14 +4,47 @@ import { useState } from "react";
 
 import { Card, Icon, Switch } from "react-native-paper";
 
-const SwitchComponent = () => {
-  const [isSwitchOn, setIsSwitchOn ] = useState(false)
-  const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn)
-  return <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
-}
-
-
 export default function Index() {
+  const [isEnabled, setIsEnabled] = useState(false);
+
+  const [cards, setCards] = useState([
+    {
+      id: 1,
+      title: "Gimnasio",
+      time: "18:30",
+      date: "vie, 11 oct",
+      icon: "dumbbell",
+      category: "Entrenamiento",
+      switchState: true,
+    },
+    {
+      id: 2,
+      title: "Practicar Noruego",
+      time: "18:00",
+      date: "L, M, X, J, V",
+      icon: "library",
+      category: "Estudio",
+      switchState: false,
+    },
+    {
+      id: 3,
+      title: "Hora de dormir",
+      time: "22:00",
+      date: "L, M, X, J",
+      icon: "power-sleep",
+      category: "Despertador",
+      switchState: true,
+    },
+  ]);
+
+  const toggleSwitch = (index: number) => {
+    setCards((prevCards) =>
+      prevCards.map((card, i) =>
+        i === index ? { ...card, switchState: !card.switchState } : card
+      )
+    );
+  };
+  
   return (
     <PaperProvider>
       <SafeAreaView style={styles.background}>
@@ -20,93 +53,37 @@ export default function Index() {
             <Text style={styles.titleText}> Alarmas </Text>
           </View>
 
-          <Card mode="elevated" style={styles.card}>
-            <View style={styles.cardContent}>
-              <View style={styles.cardTopRow}>
-                <Text style={styles.subtitleText}>Gimnasio</Text>
-              </View>
-              <View style={styles.cardMidRow}>
-                <View style={styles.cardMidRowLC}>
-                  <Text style={styles.bodyText}>18:30</Text>
+          {cards.map((card, index) => (
+            <Card key={card.id} mode="elevated" style={styles.card}>
+              <View style={styles.cardContent}>
+                <View style={styles.cardTopRow}>
+                  <Text style={styles.subtitleText}>{card.title}</Text>
                 </View>
-                <View style={styles.cardMidRowRC}>
-                  <Text style={styles.bodyText}>jue, 22 ago</Text>
+                <View style={styles.cardMidRow}>
+                  <View style={styles.cardMidRowLC}>
+                    <Text style={styles.bodyText}>{card.time}</Text>
+                  </View>
+                  <View style={styles.cardMidRowRC}>
+                    <Text style={styles.bodyText}>{card.date}</Text>
+                  </View>
                 </View>
-              </View>
-              <View style={styles.cardBottomRow}>
-                <View style={styles.cardBotRowLC}>
-                  <Icon source="dumbbell" size={40}></Icon>
-                  <Text style={styles.categoryText}>Entrenamiento</Text>
-                </View>
-                <View style={styles.cardBotRowRC}>
-                  <Switch
-                    value={true}
-                    style={styles.switch}
-                    color="#773CFF"
-                  ></Switch>
-                </View>
-              </View>
-            </View>
-          </Card>
-
-          <Card mode="elevated" style={styles.card}>
-            <View style={styles.cardContent}>
-              <View style={styles.cardTopRow}>
-                <Text style={styles.subtitleText}>Practicar Noruego</Text>
-              </View>
-              <View style={styles.cardMidRow}>
-                <View style={styles.cardMidRowLC}>
-                  <Text style={styles.bodyText}>18:00</Text>
-                </View>
-                <View style={styles.cardMidRowRC}>
-                  <Text style={styles.bodyText}>L, M, X, J, V</Text>
+                <View style={styles.cardBottomRow}>
+                  <View style={styles.cardBotRowLC}>
+                    <Icon source={card.icon} size={40}></Icon>
+                    <Text style={styles.categoryText}>{card.category}</Text>
+                  </View>
+                  <View style={styles.cardBotRowRC}>
+                    <Switch
+                      value={card.switchState}
+                      onValueChange={() => toggleSwitch(index)}
+                      style={styles.switch}
+                      color="#773CFF"
+                    />
+                  </View>
                 </View>
               </View>
-              <View style={styles.cardBottomRow}>
-                <View style={styles.cardBotRowLC}>
-                  <Icon source="library" size={40}></Icon>
-                  <Text style={styles.categoryText}>Estudio</Text>
-                </View>
-                <View style={styles.cardBotRowRC}>
-                  <Switch
-                    value={false}
-                    style={styles.switch}
-                    color="#773CFF"
-                  ></Switch>
-                </View>
-              </View>
-            </View>
-          </Card>
-
-          <Card mode="elevated" style={styles.card}>
-            <View style={styles.cardContent}>
-              <View style={styles.cardTopRow}>
-                <Text style={styles.subtitleText}>Hora de dormir</Text>
-              </View>
-              <View style={styles.cardMidRow}>
-                <View style={styles.cardMidRowLC}>
-                  <Text style={styles.bodyText}>22:00</Text>
-                </View>
-                <View style={styles.cardMidRowRC}>
-                  <Text style={styles.bodyText}>L, M, X, J</Text>
-                </View>
-              </View>
-              <View style={styles.cardBottomRow}>
-                <View style={styles.cardBotRowLC}>
-                  <Icon source="power-sleep" size={40}></Icon>
-                  <Text style={styles.categoryText}>Despertador</Text>
-                </View>
-                <View style={styles.cardBotRowRC}>
-                  <Switch
-                    value={true}
-                    style={styles.switch}
-                    color="#773CFF"
-                  ></Switch>
-                </View>
-              </View>
-            </View>
-          </Card>
-
+            </Card>
+          ))}
         </ScrollView>
       </SafeAreaView>
     </PaperProvider>
