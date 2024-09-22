@@ -9,8 +9,8 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarActiveTintColor: "#8F75FF",        
-        tabBarStyle: { backgroundColor: "#282C35", borderColor: "#282C35"},
+        tabBarActiveTintColor: "#8F75FF",
+        tabBarStyle: { backgroundColor: "#282C35", borderColor: "#282C35" },
       }}
     >
       <Tabs.Screen
@@ -21,7 +21,17 @@ export default function TabLayout() {
             <Icon source="home" size={40} color={color} />
           ),
         }}
-      ></Tabs.Screen>
+       />
+
+      <Tabs.Screen
+        name="newAlarm"
+        options={{
+          title: "Nueva Alarma",
+          tabBarIcon: ({ color, focused }) => (
+            <Icon source="alarm-plus" size={40} color={color} />
+          ),
+        }}
+       />
     </Tabs>
   );
 }
