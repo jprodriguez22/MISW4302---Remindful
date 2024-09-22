@@ -2,32 +2,50 @@ import React from "react";
 import { StyleSheet, Text, View, SafeAreaView, ScrollView } from "react-native";
 import { PaperProvider } from "react-native-paper";
 
-import { useTheme } from "react-native-paper";
 import { Card, Icon, Switch } from "react-native-paper";
 
 import { WheelPicker } from "react-native-infinite-wheel-picker";
 
+const date = new Date();
+const hour = date.getHours();
+const minute = date.getMinutes();
+const hourSource = Array.from({ length: 24 }, (_, i) =>
+  String(i).padStart(2, "0")
+);
+const minuteSource = Array.from({ length: 60 }, (_, i) =>
+  String(i).padStart(2, "0")
+);
+
+const FreqOptions = [
+  { label: "Única vez", value: "off"},
+  { label: "Diario", value: "daily" },
+  { label: "Entre semana", value: "weekdays" },
+  { label: "Fin de semana", value: "weekends" },
+  { label: "Mensual", value: "monthly" },
+  { label: "Personalizado", value: "custom" },
+];
+
+const CategoryOptions = [
+  { label: "Despertador", value: "wakeup" },
+  { label: "Estudio", value: "study" },
+  { label: "Finanzas", value: "money" },
+  { label: "Gimnasio", value: "gym"},
+  { label: "Medicina", value: "medicine" },
+];
+
 export default function NewAlarm() {
-  const theme = useTheme();
-  const date = new Date();
-  const hour = date.getHours();
-  const minute = date.getMinutes();
+  // Clock configuration
+  const [selectedHour, setSelectedHour] = React.useState<number>(hour);
+  const [selectedMinute, setSelectedMinute] = React.useState<number>(minute);
 
-  const hourSource = Array.from({ length: 24 }, (_, i) =>
-    String(i).padStart(2, "0")
-  );
-  const minuteSource = Array.from({ length: 60 }, (_, i) =>
-    String(i).padStart(2, "0")
-  );
-
-  const [selectedHour, setSelectedHour] = React.useState(hour);
-  const [selectedMinute, setSelectedMinute] = React.useState(hour);
+  // Alarm settings
+  const [selectedFreq, setSelectedFreq] = React.useState<string>('off');
+  const [selectedCategory, setSelectedCategory] = React.useState<string>('wakeup');
 
   return (
     <PaperProvider>
       <SafeAreaView style={styles.background}>
         <View style={styles.gridRootContainer}>
-
           <View style={styles.clockContainer}>
             <WheelPicker
               initialSelectedIndex={hour}
@@ -59,7 +77,9 @@ export default function NewAlarm() {
           </View>
 
           <Card mode={"elevated"} style={styles.cardBody}>
-              <Text>Hola</Text>
+            <View style={styles.cardRow1}>
+
+            </View>
           </Card>
 
         </View>
@@ -75,7 +95,10 @@ const styles = StyleSheet.create({
   },
   cardBody: {
     flex: 1,
-    backgroundColor: "#1B202B"
+    backgroundColor: "#1B202B",
+  },
+  cardRow1: {
+    flexDirection: "row",
   },
   clockContainer: {
     flexDirection: "row",
