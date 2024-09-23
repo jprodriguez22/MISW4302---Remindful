@@ -1,8 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  SafeAreaView,
+  ScrollView,
+} from "react-native";
 import { PaperProvider } from "react-native-paper";
 
 import { Card, Icon, Switch } from "react-native-paper";
+import { Dropdown } from "react-native-element-dropdown";
 
 import { WheelPicker } from "react-native-infinite-wheel-picker";
 
@@ -17,7 +25,7 @@ const minuteSource = Array.from({ length: 60 }, (_, i) =>
 );
 
 const FreqOptions = [
-  { label: "Única vez", value: "off"},
+  { label: "Única vez", value: "off" },
   { label: "Diario", value: "daily" },
   { label: "Entre semana", value: "weekdays" },
   { label: "Fin de semana", value: "weekends" },
@@ -29,7 +37,7 @@ const CategoryOptions = [
   { label: "Despertador", value: "wakeup" },
   { label: "Estudio", value: "study" },
   { label: "Finanzas", value: "money" },
-  { label: "Gimnasio", value: "gym"},
+  { label: "Gimnasio", value: "gym" },
   { label: "Medicina", value: "medicine" },
 ];
 
@@ -38,9 +46,12 @@ export default function NewAlarm() {
   const [selectedHour, setSelectedHour] = React.useState<number>(hour);
   const [selectedMinute, setSelectedMinute] = React.useState<number>(minute);
 
-  // Alarm settings
-  const [selectedFreq, setSelectedFreq] = React.useState<string>('off');
-  const [selectedCategory, setSelectedCategory] = React.useState<string>('wakeup');
+  const [selectedFreq, setSelectedFreq] = React.useState<string>("off");
+  const [freqIsFocus, freqSetIsFocus] = React.useState<boolean>(false);
+
+  const [selectedCategory, setSelectedCategory] =
+    React.useState<string>("wakeup");
+  const [catIsFocus, catSetIsFocus] = React.useState<boolean>(false);
 
   return (
     <PaperProvider>
@@ -77,11 +88,82 @@ export default function NewAlarm() {
           </View>
 
           <Card mode={"elevated"} style={styles.cardBody}>
-            <View style={styles.cardRow1}>
+            <ScrollView>
+              <View style={styles.cardRow1}>
+                <View>
+                  <Text
+                    style={[styles.label, freqIsFocus && { color: "#fff" }]}
+                  >
+                    Frecuencia
+                  </Text>
+                  <Dropdown
+                    style={[styles.dropdown]}
+                    data={FreqOptions}
+                    labelField="label"
+                    valueField="value"
+                    onChange={(item) => {
+                      setSelectedFreq(item.value);
+                      freqSetIsFocus(false);
+                    }}
+                    onFocus={() => freqSetIsFocus(true)}
+                    onBlur={() => freqSetIsFocus(false)}
+                    placeholderStyle={styles.selectedTextStyle}
+                    selectedTextStyle={styles.selectedTextStyle}
+                  />
+                </View>
+                <View style={{ marginLeft: 20 }}>
+                  <Text style={[styles.label, catIsFocus && { color: "#fff" }]}>
+                    Categoría
+                  </Text>
+                  <Dropdown
+                    style={[styles.dropdownCategory]}
+                    data={CategoryOptions}
+                    labelField="label"
+                    valueField="value"
+                    onChange={(item) => {
+                      setSelectedCategory(item.value);
+                      catSetIsFocus(false);
+                    }}
+                    onFocus={() => catSetIsFocus(true)}
+                    onBlur={() => catSetIsFocus(false)}
+                    placeholderStyle={styles.selectedTextStyle}
+                    selectedTextStyle={styles.selectedTextStyle}
+                  />
+                </View>
+              </View>
 
-            </View>
+              <View style={styles.cardRow2}>
+                <Text style={styles.daySelector}>.</Text>
+                <Text style={styles.daySelector}>.</Text>
+                <Text style={styles.daySelector}>.</Text>
+                <Text style={styles.daySelector}>.</Text>
+                <Text style={styles.daySelector}>.</Text>
+                <Text style={styles.daySelector}>.</Text>
+                <Text style={styles.daySelector}>.</Text>
+              </View>
+
+              <View style={styles.cardRow3}>
+                <Text style={styles.daySelector}>D</Text>
+                <Text style={styles.daySelector}>L</Text>
+                <Text style={styles.daySelector}>M</Text>
+                <Text style={styles.daySelector}>X</Text>
+                <Text style={styles.daySelector}>J</Text>
+                <Text style={styles.daySelector}>V</Text>
+                <Text style={styles.daySelector}>S</Text>
+              </View>
+
+              <View style={styles.cardRow4}>
+                <View style={{ width: "100%", marginTop:20 }}>
+                  <Text
+                    style={[styles.label, freqIsFocus && { color: "#fff" }]}
+                  >
+                    Nombre
+                  </Text>
+                  <TextInput style={styles.textInput} />
+                </View>
+              </View>
+            </ScrollView>
           </Card>
-
         </View>
       </SafeAreaView>
     </PaperProvider>
@@ -96,15 +178,33 @@ const styles = StyleSheet.create({
   cardBody: {
     flex: 1,
     backgroundColor: "#1B202B",
+    paddingTop: 20,
+    paddingHorizontal: 25,
   },
   cardRow1: {
+    flexGrow: 1,
     flexDirection: "row",
+  },
+  cardRow2: {
+    flexGrow: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  cardRow3: {
+    flexGrow: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  cardRow4: {
+    flexGrow: 1,
+    flexDirection: "row",
+    justifyContent: "flex-start",
   },
   clockContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 40,
+    marginBottom: 20,
   },
   clockText: {
     color: "#fff",
@@ -113,12 +213,35 @@ const styles = StyleSheet.create({
   containerStyle: {
     height: 193,
   },
+  daySelector: {
+    flex: 1,
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  dropdown: {
+    borderColor: "black",
+    borderBottomWidth: 1,
+    height: 45,
+    width: 150,
+  },
+  dropdownCategory: {
+    borderColor: "black",
+    borderBottomWidth: 1,
+    height: 45,
+    width: 120,
+  },
   gridRootContainer: {
     flex: 1,
     flexDirection: "column",
     alignContent: "flex-start",
-    marginTop: 20,
+    marginTop: 10 ,
     padding: 20,
+  },
+  label: {
+    color: "#979797",
+    fontSize: 12,
   },
   selectedLayout: {
     backgroundColor: "#2E3440",
@@ -126,5 +249,14 @@ const styles = StyleSheet.create({
   selectedElement: {
     color: "#fff",
     fontSize: 40,
+  },
+  selectedTextStyle: {
+    color: "#fff",
+    fontSize: 14,
+  },
+  textInput: {
+    color: "#fff",
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
   },
 });
