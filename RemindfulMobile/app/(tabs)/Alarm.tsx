@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   ScrollView,
 } from "react-native";
-import { PaperProvider } from "react-native-paper";
+import { Button, PaperProvider, Surface } from "react-native-paper";
 
 import { Card, Icon, Switch } from "react-native-paper";
 import { Dropdown } from "react-native-element-dropdown";
@@ -153,15 +153,50 @@ export default function NewAlarm() {
               </View>
 
               <View style={styles.cardRow4}>
-                <View style={{ width: "100%", marginTop:20 }}>
+                <View style={{ width: "100%", marginTop: 15 }}>
                   <Text
                     style={[styles.label, freqIsFocus && { color: "#fff" }]}
                   >
                     Nombre
                   </Text>
-                  <TextInput style={styles.textInput} />
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="Escribir nombre de alarma"
+                    placeholderTextColor={"#979797"}
+                  />
                 </View>
               </View>
+
+              <View style={styles.cardRow5}>
+                <Text style={{ color: "white", fontSize: 12 }}>
+                  Sonido de alarma
+                </Text>
+              </View>
+
+              <View style={styles.cardRow6}>
+                <Icon
+                  source={require("../../assets/icons/spotify.png")}
+                  size={30}
+                />
+                <Icon source="microphone" size={30} />
+              </View>
+
+              <View style={styles.cardRow7}>
+              </View>
+
+              <View style={styles.cardRow8}>
+                <Surface style={styles.multimediaSurface} elevation={5} mode="elevated">
+                    <Icon source="format-text" size={30} color="#323232" />
+                    <Icon source="image" size={30} color="#323232" />
+                    <Icon source="file-upload-outline" size={30} color="#323232" />
+                </Surface>
+              </View>
+
+              <View style={styles.cardRow9}>
+                <Button mode="elevated" style={styles.buttons} buttonColor="#841C35" textColor="white">Cancelar</Button>
+                <Button mode="elevated" style={styles.buttons} buttonColor="white" textColor="#212121">Guardar</Button>
+              </View>
+
             </ScrollView>
           </Card>
         </View>
@@ -174,6 +209,10 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     backgroundColor: "#2E3440",
+  },
+  buttons: {
+    borderRadius: 6,
+    width: 120
   },
   cardBody: {
     flex: 1,
@@ -200,11 +239,43 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
   },
+  cardRow5: {
+    flexGrow: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 8,
+  },
+  cardRow6: {
+    flexGrow: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    marginVertical: 10,
+    paddingHorizontal: 55,
+  },
+  cardRow7: {
+    flexGrow: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 6,
+    marginBottom: 16,
+    height: 34
+  },
+  cardRow8: {
+    flexGrow: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  cardRow9: {
+    flexGrow: 1,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginTop: 20
+  },
   clockContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 20,
   },
   clockText: {
     color: "#fff",
@@ -223,25 +294,36 @@ const styles = StyleSheet.create({
   dropdown: {
     borderColor: "black",
     borderBottomWidth: 1,
-    height: 45,
+    marginVertical: 4.5,
+    height: 28.5,
     width: 150,
   },
   dropdownCategory: {
     borderColor: "black",
     borderBottomWidth: 1,
-    height: 45,
+    marginVertical: 4.5,
+    height: 28.5,
     width: 120,
   },
   gridRootContainer: {
     flex: 1,
     flexDirection: "column",
     alignContent: "flex-start",
-    marginTop: 10 ,
+    marginTop: 10,
     padding: 20,
   },
   label: {
     color: "#979797",
     fontSize: 12,
+  },
+  multimediaSurface: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 5,
+    justifyContent: "space-evenly",
+    height: 40,
+    width: 170
   },
   selectedLayout: {
     backgroundColor: "#2E3440",
