@@ -24,9 +24,9 @@ export default function TabLayout() {
        />
 
       <Tabs.Screen
-        name="newAlarm"
+        name="Alarm"
         options={{
-          title: "Nueva Alarma",
+          title: "Alarma",
           tabBarIcon: ({ color, focused }) => (
             <Icon source="alarm-plus" size={40} color={color} />
           ),

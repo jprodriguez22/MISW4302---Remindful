@@ -118,8 +118,6 @@ const styles = StyleSheet.create({
   },
 
   cardContent: {
-    flex: 1,
-    flexDirection: "column",
     minHeight: "100%",
     padding: 10,
   },
