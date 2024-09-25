@@ -47,9 +47,11 @@
 
         <div class="navigation-section">
           <v-row no-gutters align="center">
-            <v-btn rounded="lg" variant="elevated" size="48" color="white">
-              <v-icon icon="mdi-history" color="primary" size="40" />
-            </v-btn>
+            <router-link to="/history">
+              <v-btn rounded="lg" variant="elevated" size="48" color="white">
+                <v-icon icon="mdi-history" color="primary" size="40" />
+              </v-btn>
+            </router-link>
             <p class="body-text sidebar-category">Historial</p>
           </v-row>
         </div>

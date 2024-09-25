@@ -13,7 +13,7 @@ import '@/styles/main.scss'
 import { createVuetify } from 'vuetify'
 
 const RemindfulTheme = {
-  dark: false,
+  dark: true,
   colors: {
     background: '#2E3440',
     primary: '#1B202B',
