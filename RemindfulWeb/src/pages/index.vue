@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-const drawer = ref(null)
+
 const setAlarms = ref([
   {
     id: 1,
@@ -30,6 +30,20 @@ const setAlarms = ref([
     switchState: true,
   },
 ])
+
+const searchName = ref(null)
+const filteredAlarms = computed(() => filterAlarms());
+
+onMounted(() => {
+  filteredAlarms.value = setAlarms.value
+})
+
+const filterAlarms = () => {
+  return setAlarms.value.filter(item => {
+    const matchName = searchName.value ? item.title.toLowerCase().includes(searchName.value.toLowerCase()) : true;
+    return matchName
+  })
+}
 </script>
 
 <template>
@@ -37,7 +51,8 @@ const setAlarms = ref([
     <v-row align="center" no-gutters>
       <v-col cols="1"></v-col>
       <v-col cols="10" class="d-flex flex-column">
-        <v-text-field hide-details="auto" color="white" variant="solo" placeholder="Buscar alarma por nombre"></v-text-field>
+        <v-text-field hide-details="auto" color="white" variant="solo" placeholder="Buscar alarma por nombre"
+          bg-color="white" v-model="searchName"></v-text-field>
       </v-col>
       <v-col cols="1"></v-col>
     </v-row>
@@ -49,7 +64,7 @@ const setAlarms = ref([
     </v-row>
   </div>
 
-  <div class="alarm-cards" v-for="alarm in setAlarms">
+  <div class="alarm-cards" v-for="alarm in filteredAlarms">
     <v-row no-gutters justify="center">
       <v-col cols="8">
         <v-card color="primary" height="140" align="center" elevation="4">
@@ -59,8 +74,8 @@ const setAlarms = ref([
               <p class="body-text">{{ alarm.time }}</p>
             </v-col>
             <v-col cols="4"><v-row justify="start" no-gutters>
-              <p class="body-text">{{ alarm.title }}</p>
-            </v-row></v-col>
+                <p class="body-text">{{ alarm.title }}</p>
+              </v-row></v-col>
             <v-col cols="2">
               <p class="body-text">{{ alarm.date }}</p>
             </v-col>
@@ -91,8 +106,10 @@ const setAlarms = ref([
   width: 100%
 }
 
-.v-field__field, .v-field__input {
-  max-height: 50px; /* Ensures the input control height */
+.v-field__field,
+.v-field__input {
+  max-height: 50px;
+  /* Ensures the input control height */
 }
 
 .title-row {
