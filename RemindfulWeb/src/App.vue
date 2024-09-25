@@ -16,33 +16,45 @@
 
         <div class="navigation-section">
           <v-row no-gutters align="center">
-            <v-btn icon="mdi-home" rounded="lg" variant="elevated" size="48" color="white"></v-btn>
+            <router-link to="/">
+              <v-btn rounded="lg" variant="elevated" size="48" color="white">
+                <v-icon icon="mdi-home" color="primary" size="40" />
+              </v-btn>
+            </router-link>
             <p class="body-text sidebar-category">Inicio</p>
           </v-row>
         </div>
 
         <div class="navigation-section">
           <v-row no-gutters align="center">
-            <v-btn icon="mdi-alarm-plus" rounded="lg" variant="elevated" size="48" color="white"></v-btn>
+            <v-btn rounded="lg" variant="elevated" size="48" color="white">
+              <v-icon icon="mdi-alarm-plus" color="primary" size="40" />
+            </v-btn>
             <p class="body-text sidebar-category">Crear alarma remota</p>
           </v-row>
         </div>
 
         <div class="navigation-section">
           <v-row no-gutters align="center">
-            <v-btn icon="mdi-account-group" rounded="lg" variant="elevated" size="48" color="white"></v-btn>
+            <router-link to="/groups">
+              <v-btn rounded="lg" variant="elevated" size="48" color="white">
+                <v-icon icon="mdi-account-group" color="primary" size="40" />
+              </v-btn>
+            </router-link>
             <p class="body-text sidebar-category">Grupos</p>
           </v-row>
         </div>
 
         <div class="navigation-section">
           <v-row no-gutters align="center">
-            <v-btn icon="mdi-history" rounded="lg" variant="elevated" size="48" color="white"></v-btn>
+            <v-btn rounded="lg" variant="elevated" size="48" color="white">
+              <v-icon icon="mdi-history" color="primary" size="40" />
+            </v-btn>
             <p class="body-text sidebar-category">Historial</p>
           </v-row>
         </div>
 
-        <v-divider /><br/>
+        <v-divider /><br />
 
         <div class="navigation-section">
           <v-row no-gutters align="center">
@@ -53,35 +65,45 @@
 
         <div class="navigation-category-section">
           <v-row no-gutters align="center">
-            <v-btn icon="mdi-power-sleep" rounded="lg" variant="elevated" size="48" color="white"></v-btn>
+            <v-btn rounded="lg" variant="elevated" size="48" color="white">
+              <v-icon icon="mdi-power-sleep" color="primary" size="40" />
+            </v-btn>
             <p class="body-text sidebar-category">Despertador</p>
           </v-row>
         </div>
-        
+
         <div class="navigation-category-section">
           <v-row no-gutters align="center">
-            <v-btn icon="mdi-library" rounded="lg" variant="elevated" size="48" color="white"></v-btn>
+            <v-btn rounded="lg" variant="elevated" size="48" color="white">
+              <v-icon icon="mdi-library" color="primary" size="40" />
+            </v-btn>
             <p class="body-text sidebar-category">Estudio</p>
           </v-row>
         </div>
-        
+
         <div class="navigation-category-section">
           <v-row no-gutters align="center">
-            <v-btn icon="mdi-currency-usd" rounded="lg" variant="elevated" size="48" color="white"></v-btn>
+            <v-btn rounded="lg" variant="elevated" size="48" color="white">
+              <v-icon icon="mdi-currency-usd" color="primary" size="40" />
+            </v-btn>
             <p class="body-text sidebar-category">Finanzas</p>
           </v-row>
         </div>
-        
+
         <div class="navigation-category-section">
           <v-row no-gutters align="center">
-            <v-btn icon="mdi-dumbbell" rounded="lg" variant="elevated" size="48" color="white"></v-btn>
+            <v-btn rounded="lg" variant="elevated" size="48" color="white">
+              <v-icon icon="mdi-dumbbell" color="primary" size="40" />
+            </v-btn>
             <p class="body-text sidebar-category">Gimnasio</p>
           </v-row>
         </div>
-        
+
         <div class="navigation-category-section">
           <v-row no-gutters align="center">
-            <v-btn icon="mdi-mortar-pestle-plus" rounded="lg" variant="elevated" size="48" color="white"></v-btn>
+            <v-btn rounded="lg" variant="elevated" size="48" color="white">
+              <v-icon icon="mdi-mortar-pestle-plus" color="primary" size="40" />
+            </v-btn>
             <p class="body-text sidebar-category">Medicina</p>
           </v-row>
         </div>
@@ -115,6 +137,7 @@ const updateWindowSize = () => {
   currentWidth.value = window.innerWidth;
 };
 
+
 onMounted(() => {
   window.addEventListener('resize', updateWindowSize);
 });
@@ -147,6 +170,7 @@ p {
 
 .menu-bar {
   margin-top: 40px;
+  margin-bottom: 40px;
   text-align: center;
 }
 

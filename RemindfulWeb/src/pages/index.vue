@@ -96,7 +96,7 @@ const setAlarms = ref([
 }
 
 .title-row {
-  margin: 40px 0;
+  margin-bottom: 40px;
 }
 
 #menu-button {
