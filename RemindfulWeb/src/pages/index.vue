@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-
+const drawer = ref(null)
 const setAlarms = ref([
   {
     id: 1,
@@ -33,16 +33,13 @@ const setAlarms = ref([
 </script>
 
 <template>
-  <div class="menu-bar">
+  <div class="menu-bar-content">
     <v-row align="center" no-gutters>
-      <v-col cols="1">
-        <v-btn icon="mdi-menu" rounded="0" variant="elevated" id="menu-button" size="50" color="white"></v-btn>
-      </v-col>
-      <v-col cols="10">
+      <v-col cols="1"></v-col>
+      <v-col cols="10" class="d-flex flex-column">
         <v-text-field hide-details="auto" color="white" variant="solo" placeholder="Buscar alarma por nombre"></v-text-field>
       </v-col>
-      <v-col cols="1">
-      </v-col>
+      <v-col cols="1"></v-col>
     </v-row>
   </div>
 
@@ -86,13 +83,20 @@ const setAlarms = ref([
   height: 100%;
 }
 
-.menu-bar {
-  margin-top: 40px;
+.menu-bar-content {
+  position: absolute;
+  top: 40px;
   text-align: center;
+  max-height: 40px;
+  width: 100%
+}
+
+.v-field__field, .v-field__input {
+  max-height: 50px; /* Ensures the input control height */
 }
 
 .title-row {
-  margin: 40px 0;
+  margin-bottom: 40px;
 }
 
 #menu-button {
