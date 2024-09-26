@@ -9,10 +9,12 @@ import {
 } from "react-native";
 import { Button, PaperProvider, Surface } from "react-native-paper";
 
-import { Card, Icon, Switch } from "react-native-paper";
+import { Card, Icon, Switch, Snackbar } from "react-native-paper";
 import { Dropdown } from "react-native-element-dropdown";
 
 import { WheelPicker } from "react-native-infinite-wheel-picker";
+
+import { Link } from "expo-router";
 
 const date = new Date();
 const hour = date.getHours();
@@ -181,22 +183,46 @@ export default function NewAlarm() {
                 <Icon source="microphone" size={30} />
               </View>
 
-              <View style={styles.cardRow7}>
-              </View>
+              <View style={styles.cardRow7}></View>
 
               <View style={styles.cardRow8}>
-                <Surface style={styles.multimediaSurface} elevation={5} mode="elevated">
-                    <Icon source="format-text" size={30} color="#323232" />
-                    <Icon source="image" size={30} color="#323232" />
-                    <Icon source="file-upload-outline" size={30} color="#323232" />
+                <Surface
+                  style={styles.multimediaSurface}
+                  elevation={5}
+                  mode="elevated"
+                >
+                  <Icon source="format-text" size={30} color="#323232" />
+                  <Icon source="image" size={30} color="#323232" />
+                  <Icon
+                    source="file-upload-outline"
+                    size={30}
+                    color="#323232"
+                  />
                 </Surface>
               </View>
 
               <View style={styles.cardRow9}>
-                <Button mode="elevated" style={styles.buttons} buttonColor="#841C35" textColor="white">Cancelar</Button>
-                <Button mode="elevated" style={styles.buttons} buttonColor="white" textColor="#212121">Guardar</Button>
+                <Link href="/(tabs)/" asChild>
+                  <Button
+                    mode="elevated"
+                    style={styles.buttons}
+                    buttonColor="#841C35"
+                    textColor="white"
+                  >
+                    Cancelar
+                  </Button>
+                </Link>
+                <Link href="/(tabs)/" asChild>
+                  <Button
+                    mode="elevated"
+                    style={styles.buttons}
+                    buttonColor="white"
+                    textColor="#212121"
+                  >
+                    Guardar
+                  </Button>
+                </Link>
               </View>
-
             </ScrollView>
           </Card>
         </View>
@@ -212,7 +238,7 @@ const styles = StyleSheet.create({
   },
   buttons: {
     borderRadius: 6,
-    width: 120
+    width: 120,
   },
   cardBody: {
     flex: 1,
@@ -259,7 +285,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 6,
     marginBottom: 16,
-    height: 34
+    height: 34,
   },
   cardRow8: {
     flexGrow: 1,
@@ -270,7 +296,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexDirection: "row",
     justifyContent: "space-evenly",
-    marginTop: 20
+    marginTop: 20,
   },
   clockContainer: {
     flexDirection: "row",
@@ -317,13 +343,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   multimediaSurface: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "white",
     borderRadius: 5,
     justifyContent: "space-evenly",
     height: 40,
-    width: 170
+    width: 170,
   },
   selectedLayout: {
     backgroundColor: "#2E3440",

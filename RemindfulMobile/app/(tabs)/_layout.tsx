@@ -21,7 +21,7 @@ export default function TabLayout() {
             <Icon source="home" size={40} color={color} />
           ),
         }}
-       />
+      />
 
       <Tabs.Screen
         name="Alarm"
@@ -31,7 +31,17 @@ export default function TabLayout() {
             <Icon source="alarm-plus" size={40} color={color} />
           ),
         }}
-       />
+      />
+
+      <Tabs.Screen
+        name="Profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color, focused }) => (
+            <Icon source="account" size={40} color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
